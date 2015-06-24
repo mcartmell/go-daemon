@@ -3,8 +3,8 @@ package daemon
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/kardianos/osext"
 	"os"
-	"path/filepath"
 	"syscall"
 )
 
@@ -180,7 +180,7 @@ func (d *Context) closeFiles() (err error) {
 }
 
 func (d *Context) prepareEnv() (err error) {
-	if d.abspath, err = filepath.Abs(os.Args[0]); err != nil {
+	if d.abspath, err = osext.Executable(); err != nil {
 		return
 	}
 
